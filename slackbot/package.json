@@ -1,0 +1,13 @@
+{
+  "name": "slash-stock-slackbot",
+  "version": "0.0.1",
+  "author": "Sebastian Hallén",
+  "license": "MIT",
+  "private": true,
+  "keywords": [],
+  "dependencies": {
+    "cls-bluebird": "^1.0.1",
+    "lambda-slack-router": "~1.2.1",
+    "request-promise": "^3.0.0"
+  }
+}

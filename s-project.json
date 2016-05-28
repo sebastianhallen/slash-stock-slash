@@ -1,5 +1,6 @@
 {
   "name": "slash-stock",
-  "custom": {},
-  "plugins": ["serverless-models-plugin"]
+  "plugins": [
+    "serverless-runtime-babel"
+  ]
 }
