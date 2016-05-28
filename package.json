@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha ./test/test*.js"
   },
   "author": "Sebastian Hallén",
   "license": "ISC",
   "dependencies": {
     "request-promise": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.1",
+    "serverless-models-plugin": "^1.0.1"
   }
 }
