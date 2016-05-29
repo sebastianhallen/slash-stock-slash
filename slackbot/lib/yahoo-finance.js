@@ -8,8 +8,9 @@ const uri = 'https://query.yahooapis.com/v1/public/yql';
 
 function queryUri(tickers) {
   const tickerArgs = tickers.map(ticker => `"${ticker}"`).join(',');
+  const fields = ['symbol', 'LastTradePriceOnly', 'Currency', 'Change', 'PercentChange', 'Name'];
   const args = querystring.stringify({
-    q: `select * from yahoo.finance.quotes where symbol in (${tickerArgs})`,
+    q: `select ${fields.join(',')} from yahoo.finance.quotes where symbol in (${tickerArgs})`,
     format: 'json',
     env,
     callback: '',
