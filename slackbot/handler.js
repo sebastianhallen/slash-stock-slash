@@ -19,7 +19,14 @@ function lookupQuotes(tickers, range, callback) {
 
 slackbot.addCommand('ticker', ['ticker-names...'], 'Get stock quote by ticker', (event, callback) => {
   const tickers = event.args['ticker-names'];
-  lookupQuotes(tickers, '1y', callback);
+  let range = tickers.pop();
+
+  if (!range.match(/\d+(d|m|y)/i)) {
+    tickers.push(range);
+    range = '1y';
+  }
+
+  lookupQuotes(tickers, range, callback);
 });
 
 slackbot.addCommand('omx', [{ 'graph-range': '1y' }], 'Get OMX info', (event, callback) => {
