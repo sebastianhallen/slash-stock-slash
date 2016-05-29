@@ -28,7 +28,7 @@ function quote(tickers) {
       return [];
     }
 
-    if (response.query.count === 1) {
+    if (!response.query.results.quote.length) {
       return [response.query.results.quote];
     }
 

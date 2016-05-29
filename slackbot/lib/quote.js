@@ -29,7 +29,7 @@ function Quote(data) {
   this.change = asPrice(data.Change, data.Currency);
   this.changePercent = data.PercentChange;
   this.toString = () => `${data.Name} (${data.symbol}) ${this.price} Δ ${this.change}|${this.changePercent}`;
-  this.chart = `http://chart.finance.yahoo.com/z?s=${this.symbol}&t=1y&p=m50,m200`;
+  this.chart = (range) => `http://chart.finance.yahoo.com/z?s=${this.symbol}&t=${range}&p=m50,m200`;
 }
 
 module.exports = Quote;

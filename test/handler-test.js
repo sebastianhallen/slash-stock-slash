@@ -27,8 +27,19 @@ describe('handler', function () {
 
   it('omx', done => {
     apiMock.tickerQuery(['^OMX']);
-    slackbot.omx({}, (err, message) => {
-      assert(message.text.length > 0);
+    slackbot.omx({ args: {} }, (err, message) => {
+      if (err) { throw err; }
+      assert(message.text === '^OMX', message.text);
+      done();
+    });
+  });
+
+  it('omx 6m', done => {
+    apiMock.tickerQuery(['^OMX']);
+    slackbot.omx({ args: { 'graph-range': '6m' } }, (err, message) => {
+      const imageUrl = message.attachments[0].image_url;
+
+      assert(imageUrl === 'http://chart.finance.yahoo.com/z?s=^OMX&t=6m&p=m50,m200');
       done();
     });
   });
