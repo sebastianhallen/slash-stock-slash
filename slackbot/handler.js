@@ -8,8 +8,14 @@ slackbot.addCommand('ticker', ['ticker-name'], 'Get stock quote by ticker', (eve
   const ticker = event.args['ticker-name'];
 
   yf.quote(ticker)
-    .then(quote => quote.toString())
-    .then(quote => callback(null, slackbot.inChannelResponse(quote)))
+    .then(quote => ({
+      text: quote.toString(),
+      attachments: [{
+        text: 'grap:',
+        image_url: quote.chart,
+      }],
+    }))
+    .then(message => callback(null, slackbot.inChannelResponse(message)))
     .catch(error => callback(error));
 });
 
