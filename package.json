@@ -21,6 +21,7 @@
     "eslint": "^2.5.3",
     "eslint-config-airbnb": "^6.2.0",
     "mocha": "^2.2.1",
+    "nock": "^8.0.0",
     "request-promise": "^3.0.0"
   },
   "eslintConfig": {

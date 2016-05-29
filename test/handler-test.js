@@ -1,11 +1,13 @@
 import { slackbot } from '../slackbot/handler';
 import { assert } from 'chai';
+import apiMock from './yahoo-api-mock';
 
 describe('handler', function () {
   this.timeout(10000);
 
-  function ticker(tickers, check, done) {
-    slackbot.ticker({ args: { 'ticker-name': tickers[0] } }, (err, message) => {
+  function ticker(tickerName, check, done) {
+    apiMock.tickerQuery(tickerName);
+    slackbot.ticker({ args: { 'ticker-name': tickerName } }, (err, message) => {
       check(message);
       done();
     });
