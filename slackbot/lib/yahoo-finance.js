@@ -6,9 +6,10 @@ const Quote = require('./quote');
 const env = 'store://datatables.org/alltableswithkeys';
 const uri = 'https://query.yahooapis.com/v1/public/yql';
 
-function queryUri(ticker) {
+function queryUri(tickers) {
+  const tickerArgs = tickers.map(ticker => `"${ticker}"`).join(',');
   const args = querystring.stringify({
-    q: `select * from yahoo.finance.quotes where symbol in ("${ticker}")`,
+    q: `select * from yahoo.finance.quotes where symbol in (${tickerArgs})`,
     format: 'json',
     env,
     callback: '',
@@ -17,12 +18,23 @@ function queryUri(ticker) {
   return `${uri}?${args}`;
 }
 
-function quote(ticker) {
+function quote(tickers) {
   return request({
-    uri: queryUri(ticker),
+    uri: queryUri(tickers),
     json: true,
   })
-  .then(response => new Quote(response.query.results.quote));
+  .then(response => {
+    if (response.query.count === 0) {
+      return [];
+    }
+
+    if (response.query.count === 1) {
+      return [response.query.results.quote];
+    }
+
+    return response.query.results.quote;
+  })
+  .then(quotes => quotes.map(q => new Quote(q)));
 }
 
 module.exports.queryUri = queryUri;
