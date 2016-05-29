@@ -10,6 +10,7 @@ import yf from '../slackbot/lib/yahoo-finance';
 function buildResponse(tickers) {
   return tickers
     .map(ticker => path.resolve(`./test/samples/${ticker}.json`))
+    .map(file => file.replace('^', ''))
     .map(file => fs.readFileSync(file))
     .map(raw => JSON.parse(raw))
     .reduce((prev, curr) => {

@@ -24,4 +24,12 @@ describe('handler', function () {
   it('ticker GOOG SEB-A.ST', done => {
     ticker(['GOOG', 'SEB-A.ST'], message => assert(message.text === 'GOOG, SEB-A.ST'), done);
   });
+
+  it('omx', done => {
+    apiMock.tickerQuery(['^OMX']);
+    slackbot.omx({}, (err, message) => {
+      assert(message.text.length > 0);
+      done();
+    });
+  });
 });
