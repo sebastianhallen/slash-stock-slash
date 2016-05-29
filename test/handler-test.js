@@ -5,7 +5,7 @@ describe('handler', function () {
   this.timeout(10000);
 
   function ticker(tickers, check, done) {
-    slackbot.ticker({ args: { ticker: tickers } }, (err, message) => {
+    slackbot.ticker({ args: { 'ticker-name': tickers[0] } }, (err, message) => {
       check(message);
       done();
     });
