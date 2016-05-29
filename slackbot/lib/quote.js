@@ -16,7 +16,7 @@ function asPrice(amount, currency) {
   }];
 
   const prefix = prefixedCurrencies.filter(p => p.name === currency);
-  if (prefix) {
+  if (prefix.length) {
     return `${prefix[0].symbol}${amount}`;
   }
 

@@ -13,7 +13,11 @@ describe('handler', function () {
     });
   }
 
-  it('ticker', done => {
+  it('ticker GOOG', done => {
     ticker(['GOOG'], message => assert(message.text.length > 0), done);
+  });
+
+  it('ticker SEB-A.ST', done => {
+    ticker(['SEB-A.ST'], message => assert(message.text.length > 0), done);
   });
 });
